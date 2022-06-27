@@ -193,6 +193,15 @@ module.exports = {
           'src/components/Toolbar/Toolbar.js',
         ],
       },
+      {
+        name: "Templates",
+        include: [
+          // "src/MergeBasicLayout/MergeBasicLayout.js",
+          "src/components/MergeHeader/MergeHeader.js",
+          "src/components/MergeSideNavigation/MergeSideNavigation.js",
+          // "src/MergeMainContent/MergeMainContent.js",
+        ]
+      },
     ],
     wrapper: 'src/components/UXPinWrapper/UXPinWrapper.js',
     webpackConfig: 'uxpin.webpack.config.js',
