@@ -14,9 +14,10 @@ function Rating(props) {
   return (
     <RatingM 
       {...props}
-      emptyIcon={props.emptyIcon && <Icon>{props.emptyIcon}</Icon>}
-      icon={props.icon && <Icon>{props.icon}</Icon>}
+      emptyIcon={props.emptyIcon && <Icon fontSize="inherit" >{props.emptyIcon}</Icon>}
+      icon={props.icon && <Icon fontSize="inherit" >{props.icon}</Icon>}
       getLabelText={(value) => `${value} Rating${value !== 1 ? 's' : ''}`}
+      size={props.size}
       key={id}
     />
   )
