@@ -3,17 +3,21 @@ import PropTypes, { func, string } from 'prop-types';
 import RatingM from '@mui/material/Rating';
 import Icon from '../Icon/Icon';
 import { iconVariants } from '../Icon/icon-variants'
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * @uxpindocurl https://mui.com/api/rating/#main-content
  */
 function Rating(props) {
+  const id = uuidv4();
+
   return (
     <RatingM 
       {...props}
       emptyIcon={props.emptyIcon && <Icon>{props.emptyIcon}</Icon>}
       icon={props.icon && <Icon>{props.icon}</Icon>}
       getLabelText={(value) => `${value} Rating${value !== 1 ? 's' : ''}`}
+      key={id}
     />
   )
 }
@@ -91,7 +95,7 @@ Rating.propTypes = {
   /**
    * The size of the component.
    */
-  size: PropTypes.oneOf(['small', 'medium', 'large', string]),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 
   /**
    * The rating value.

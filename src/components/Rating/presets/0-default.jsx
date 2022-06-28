@@ -6,5 +6,6 @@ export default (
     uxpId="rating-1" 
     emptyIcon='star'
     icon='star_border'
+    size='large'
   />
 );
