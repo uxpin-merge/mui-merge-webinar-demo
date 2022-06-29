@@ -139,6 +139,8 @@ module.exports = {
           'src/components/Stepper/Stepper.js',
           'src/components/Tab/Tab.js',
           'src/components/Tabs/Tabs.js',
+          'src/components/TabContent/TabContent.js',
+          'src/components/TabsWithPanel/TabsWithPanel.js'
         ]
       },
       { 
