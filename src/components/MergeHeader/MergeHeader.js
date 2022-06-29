@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   appBar: {
-    background: "#000000",
+    background: "#9c27b0",
     zIndex: theme.zIndex.drawer + 1,
     borderTop: "5px solid",
     borderTopColor: theme.palette.decoration.main,
@@ -83,7 +83,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     marginRight: -theme.spacing(2),
     "& .MuiBadge-badge": {
-      backgroundColor: theme.palette.headerBadges.main,
+      backgroundColor: "#000000",
       color: "#ffffff",
       // right: -3,
       top: 10,
