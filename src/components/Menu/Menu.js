@@ -17,7 +17,7 @@ export default function Menu(props) {
   };
 
   return (
-    <div>
+    <div style={{display: "inline-block"}}>
       {props.trigger === "icon" ? (
         <IconButton
           aria-label={props.label}

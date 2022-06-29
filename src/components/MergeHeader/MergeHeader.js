@@ -15,7 +15,7 @@ import MergeSideNavigation from "../MergeSideNavigation/MergeSideNavigation";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 // import Icon from "@mui/material/Icon";
 // import Badge from "@mui/material/Badge";
-import Menu from "@mui/material/Menu";
+import Menu from "../Menu/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Image from "../Image/Image";
 // import Tabs from "../Tabs/Tabs";
@@ -85,8 +85,8 @@ const useStyles = makeStyles(theme => ({
     "& .MuiBadge-badge": {
       backgroundColor: theme.palette.headerBadges.main,
       color: "#ffffff",
-      right: -3,
-      top: 2,
+      // right: -3,
+      top: 10,
       // border: "1px solid #fff"
     }
   },
@@ -243,7 +243,7 @@ function MergeHeader(props) {
                 )}
               </Box>
             )}
-            {props.hasAccountIcon && (
+            {/* {props.hasAccountIcon && (
               <Menu
                 trigger="icon"
                 label="My Account"
@@ -254,7 +254,7 @@ function MergeHeader(props) {
                 className={classes.icons}
                 placement="bottom-end"
               />
-            )}
+            )} */}
           </div>
         </Toolbar>
         {props.hasSearch && (
