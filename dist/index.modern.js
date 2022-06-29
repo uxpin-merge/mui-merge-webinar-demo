@@ -1,5 +1,5 @@
 import React__default, { createElement, useState, useEffect, Fragment } from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import Button$1 from '@mui/material/Button';
 import IconM from '@mui/material/Icon';
 import ButtonGroupM from '@mui/material/ButtonGroup';
@@ -7,7 +7,7 @@ import CheckboxM from '@mui/material/Checkbox';
 import FormControlLabelM from '@mui/material/FormControlLabel';
 import { makeStyles } from '@mui/styles';
 import { v4 } from 'uuid';
-import CollapseM from '@mui/material/Collapse';
+import Collapse$1 from '@mui/material/Collapse';
 import IconButtonM from '@mui/material/IconButton';
 import FabM from '@mui/material/Fab';
 import LoadingButtonM from '@mui/lab/LoadingButton';
@@ -31,6 +31,7 @@ import ListM from '@mui/material/List';
 import ListItemM from '@mui/material/ListItem';
 import ListItemIconM from '@mui/material/ListItemIcon';
 import ListItemTextM from '@mui/material/ListItemText';
+import ListItemSecondaryActionM from '@mui/material/ListItemSecondaryAction';
 import ListItemAvatarM from '@mui/material/ListItemAvatar';
 import ListItemButtonM from '@mui/material/ListItemButton';
 import ListSubheaderM from '@mui/material/ListSubheader';
@@ -265,7 +266,7 @@ CheckboxWithLabel.defaultProps = {
 };
 
 function Collapse(props) {
-  return /*#__PURE__*/React__default.createElement(CollapseM, props, props.children);
+  return /*#__PURE__*/React__default.createElement(Collapse$1, props, props.children);
 }
 
 Collapse.propTypes = {
@@ -502,12 +503,19 @@ RadioGroup.defaultProps = {
 };
 
 function Rating(props) {
+  var id = v4();
   return /*#__PURE__*/createElement(RatingM, _extends({}, props, {
-    emptyIcon: props.emptyIcon && /*#__PURE__*/createElement(Icon, null, props.emptyIcon),
-    icon: props.icon && /*#__PURE__*/createElement(Icon, null, props.icon),
+    emptyIcon: props.emptyIcon && /*#__PURE__*/createElement(Icon, {
+      fontSize: "inherit"
+    }, props.emptyIcon),
+    icon: props.icon && /*#__PURE__*/createElement(Icon, {
+      fontSize: "inherit"
+    }, props.icon),
     getLabelText: function getLabelText(value) {
       return value + " Rating" + (value !== 1 ? 's' : '');
-    }
+    },
+    size: props.size,
+    key: id
   }));
 }
 
@@ -524,7 +532,7 @@ Rating.propTypes = {
   getLabelText: PropTypes.func,
   highlightSelectedOnly: PropTypes.bool,
   name: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large', string]),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
   value: PropTypes.number,
   onChange: PropTypes.func,
   onChangeActive: PropTypes.func,
@@ -878,22 +886,142 @@ ListItemText.propTypes = {
   sx: PropTypes.object
 };
 
+function ListItemSecondaryAction(props) {
+  return /*#__PURE__*/React__default.createElement(ListItemSecondaryActionM, props, props.children);
+}
+
+ListItemSecondaryAction.propTypes = {
+  children: PropTypes.node,
+  classes: PropTypes.object,
+  className: PropTypes.string
+};
+
+var _excluded$2 = ["uxpinRef", "isCollapsible", "button", "onClick"];
+
 function ListItem(props) {
-  return /*#__PURE__*/React__default.createElement(ListItemM, props, props.children);
+  var useStyles = makeStyles(function (theme) {
+    return {
+      collapsedListItem: {
+        borderLeft: "3px solid",
+        borderLeftColor: theme.palette.decoration.main,
+        backgroundColor: "#f9f9f9",
+        '&.Mui-selected': {
+          backgroundColor: "#f9f9f9"
+        },
+        '& .MuiIcon-root': {
+          marginLeft: "-3px"
+        }
+      },
+      listItem: {
+        '&.Mui-selected': {
+          borderLeft: "3px solid",
+          borderLeftColor: theme.palette.decoration.main,
+          backgroundColor: "#f9f9f9",
+          color: theme.palette.primary,
+          '& .MuiIcon-root': {
+            marginLeft: "-3px"
+          }
+        }
+      },
+      collapseContainer: {
+        paddingLeft: "36px",
+        paddingBottom: "24px",
+        paddingTop: "20px",
+        borderBottom: "1px solid #0000001f",
+        '& .MuiListItem-root': {
+          paddingTop: 0,
+          paddingBottom: 0,
+          '&.Mui-selected': {
+            border: 0,
+            color: theme.palette.primary.main,
+            background: "#ffffff",
+            '&.MuiListItem-button:hover': {
+              color: theme.palette.primary.main,
+              opacity: "1"
+            }
+          },
+          '&.MuiListItem-button:hover': {
+            background: "#ffffff",
+            opacity: ".5"
+          }
+        },
+        '& .MuiListItem-divider': {
+          border: 0
+        }
+      },
+      icon: {
+        width: "36px"
+      }
+    };
+  });
+  var classes = useStyles(props);
+
+  var _React$useState = React__default.useState(props.collapsed),
+      open = _React$useState[0],
+      setOpen = _React$useState[1];
+
+  React__default.useEffect(function () {
+    setOpen(props.collapsed);
+  }, [props]);
+
+  function handleClick() {
+    setOpen(!open);
+  }
+
+  var isCollapsible = props.isCollapsible,
+      button = props.button,
+      onClick = props.onClick,
+      other = _objectWithoutPropertiesLoose(props, _excluded$2);
+
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, {
+    key: "some-unique-id"
+  }, /*#__PURE__*/React__default.createElement(ListItemM, _extends({
+    button: isCollapsible ? true : button,
+    onClick: isCollapsible ? handleClick : onClick,
+    className: open ? classes.collapsedListItem : classes.listItem
+  }, other), props.icon ? /*#__PURE__*/React__default.createElement(IconM, {
+    color: props.iconColor,
+    fontSize: "small",
+    className: classes.icon
+  }, props.icon) : null, /*#__PURE__*/React__default.createElement(ListItemText, {
+    primary: props.primary,
+    secondary: props.secondary,
+    inset: props.inset
+  }), isCollapsible ? open ? /*#__PURE__*/React__default.createElement(IconM, null, "expand_less") : /*#__PURE__*/React__default.createElement(IconM, null, "expand_more") : /*#__PURE__*/React__default.createElement(ListItemSecondaryAction, null, props.children)), isCollapsible ? /*#__PURE__*/React__default.createElement(Collapse$1, {
+    "in": open,
+    timeout: "auto",
+    unmountOnExit: true,
+    className: classes.collapseContainer
+  }, props.children) : null);
 }
 
 ListItem.propTypes = {
-  alignItems: PropTypes.oneOf(['center', 'flex-start']),
+  primary: PropTypes.string,
+  secondary: PropTypes.string,
+  icon: PropTypes.string,
+  iconColor: PropTypes.oneOf(["inherit", "primary", "secondary", "action", "error", "disabled"]),
+  alignItems: PropTypes.oneOf(["flex-start", "center"]),
+  isCollapsible: PropTypes.bool,
+  collapsed: PropTypes.bool,
+  button: PropTypes.bool,
+  selected: PropTypes.bool,
+  disabled: PropTypes.bool,
+  disableGutters: PropTypes.bool,
+  inset: PropTypes.bool,
+  divider: PropTypes.bool,
+  onClick: PropTypes.func,
   children: PropTypes.node,
   classes: PropTypes.object,
-  component: PropTypes.elementType,
-  componentProps: PropTypes.object,
+  className: PropTypes.string,
+  component: PropTypes.string,
+  ContainerComponent: PropTypes.node,
+  ContainerProps: PropTypes.object,
   dense: PropTypes.bool,
-  disableGutters: PropTypes.bool,
-  disablePadding: PropTypes.bool,
-  divider: PropTypes.bool,
-  secondaryAction: PropTypes.node,
-  sx: PropTypes.object
+  focusVisibleClassName: PropTypes.string
+};
+ListItem.defaultProps = {
+  iconColor: "primary",
+  divider: true
 };
 
 function ListItemAvatar(props) {
@@ -1073,7 +1201,11 @@ function Menu(props) {
     setAnchorEl(null);
   };
 
-  return /*#__PURE__*/createElement("div", null, props.trigger === "icon" ? /*#__PURE__*/createElement(IconButtonM, {
+  return /*#__PURE__*/createElement("div", {
+    style: {
+      display: "inline-block"
+    }
+  }, props.trigger === "icon" ? /*#__PURE__*/createElement(IconButtonM, {
     "aria-label": props.label,
     "aria-haspopup": "true",
     onClick: handleClick,
@@ -1131,7 +1263,8 @@ MenuItem.propTypes = {
   divider: PropTypes.bool,
   focusVisibleClassName: PropTypes.string,
   sx: PropTypes.object,
-  value: PropTypes.string
+  value: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 function Pagination(props) {
@@ -1243,7 +1376,7 @@ AlertTitle.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$2 = ["isOpen", "icon", "title", "hasClose", "onClose"];
+var _excluded$3 = ["isOpen", "icon", "title", "hasClose", "onClose"];
 
 function Alert(props) {
   var _React$useState = React__default.useState(props.isOpen),
@@ -1256,9 +1389,9 @@ function Alert(props) {
 
   var icon = props.icon,
       title = props.title,
-      otherProps = _objectWithoutPropertiesLoose(props, _excluded$2);
+      otherProps = _objectWithoutPropertiesLoose(props, _excluded$3);
 
-  return /*#__PURE__*/React__default.createElement(CollapseM, {
+  return /*#__PURE__*/React__default.createElement(Collapse$1, {
     "in": open
   }, /*#__PURE__*/React__default.createElement(AlertM, _extends({}, otherProps, {
     icon: icon ? /*#__PURE__*/React__default.createElement(Icon, {
@@ -1394,10 +1527,10 @@ LinearProgress.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$3 = ["uxpinRef"];
+var _excluded$4 = ["uxpinRef"];
 function Snackbar(props) {
   var uxpinRef = props.uxpinRef,
-      other = _objectWithoutPropertiesLoose(props, _excluded$3);
+      other = _objectWithoutPropertiesLoose(props, _excluded$4);
 
   var _React$useState = useState(props.open),
       open = _React$useState[0],
@@ -1453,10 +1586,10 @@ Snackbar.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$4 = ["uxpinRef"];
+var _excluded$5 = ["uxpinRef"];
 
 function Skeleton(props) {
-  var other = _objectWithoutPropertiesLoose(props, _excluded$4);
+  var other = _objectWithoutPropertiesLoose(props, _excluded$5);
 
   return /*#__PURE__*/createElement(SkeletonM, other, props.children);
 }
@@ -1567,11 +1700,11 @@ FormHelperText.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$5 = ["uxpinRef"];
+var _excluded$6 = ["uxpinRef"];
 
 function Box(props) {
   var uxpinRef = props.uxpinRef,
-      other = _objectWithoutPropertiesLoose(props, _excluded$5);
+      other = _objectWithoutPropertiesLoose(props, _excluded$6);
 
   return /*#__PURE__*/React__default.createElement(BoxM, _extends({
     ref: uxpinRef
@@ -1648,7 +1781,7 @@ Grid.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$6 = ["hasDivider"];
+var _excluded$7 = ["hasDivider"];
 
 function Stack(props) {
   var dividerOrientation = '';
@@ -1660,7 +1793,7 @@ function Stack(props) {
   }
 
   var hasDivider = props.hasDivider,
-      otherProps = _objectWithoutPropertiesLoose(props, _excluded$6);
+      otherProps = _objectWithoutPropertiesLoose(props, _excluded$7);
 
   return /*#__PURE__*/createElement(StackM, _extends({}, otherProps, {
     divider: hasDivider && /*#__PURE__*/createElement(DividerM, {
@@ -1896,6 +2029,15 @@ var boilerplateTheme = {
       light: "#ba68c8",
       dark: "#7b1fa2",
       contrastText: "#ffffff"
+    },
+    decoration: {
+      main: "#2684FF"
+    },
+    error: {
+      main: "#e72400"
+    },
+    headerBadges: {
+      main: "#2684FF"
     }
   }
 };
@@ -1905,7 +2047,12 @@ function UXPinWrapper(_ref) {
   var children = _ref.children;
   return /*#__PURE__*/React__default.createElement(ThemeProvider, {
     theme: theme
-  }, children);
+  }, /*#__PURE__*/React__default.createElement(PaperM, {
+    elevation: 0,
+    style: {
+      backgroundColor: "transparent"
+    }
+  }, children));
 }
 
 export { Accordion, AccordionDetails, AccordionSummary, Alert, AlertTitle, AppBar, Avatar, Badge, BottomNavigation, BottomNavigationAction, Box, Breadcrumbs, Button, ButtonGroup, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Checkbox, CheckboxWithLabel, CircularProgress, Collapse, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, FloatingActionButton, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, Grid, Icon, IconButton, Image, LinearProgress, Link, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, ListSubheader, LoadingButton, Menu, MenuItem, Pagination, Paper, Radio, RadioGroup, RadioWithLabel, Rating, Select, Skeleton, Slider, Snackbar, Stack, Switch, SwitchWithLabel, Tab, Table, TableBody, TableCell, TableHead, TableRow, Tabs, TextField, ToggleButton, ToggleButtonGroup, Toolbar, Tooltip, Typography, UXPinWrapper };
