@@ -89,9 +89,9 @@ export default (
         >
             <Icon uxpId="1.1.1" color="inherit">notifications</Icon>
         </IconButton>
-        <Badge badgeContent="3" max="9" uxpId="1.2.1">
+        {/* <Badge badgeContent="3" max="9" uxpId="1.2.1">
             <IconButton uxpId="Icon-Button-1" ariaLabel="add accessibility text">shopping_cart</IconButton>
-        </Badge>
+        </Badge> */}
         {/* <Menu uxpId="menu-1" icon="account_circle" trigger="icon">
     <MenuItem uxpId="menuItem-1">Profile</MenuItem>
     <MenuItem uxpId="menuItem-2" divider={true}>My Account</MenuItem>

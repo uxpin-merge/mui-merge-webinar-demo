@@ -360,11 +360,13 @@ MergeHeader.propTypes = {
 
   /**
   * If `true` account icon will display
+   * @uxpinignoreprop
   */
   hasAccountIcon: PropTypes.bool,
   
     /**
   * Account menu array if "Account Icon" = `true`
+  * @uxpinignoreprop
   */
   accountMenu: PropTypes.array,
 
