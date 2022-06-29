@@ -10,6 +10,7 @@ import ListItemText from "../ListItemText/ListItemText";
 import ListItemSecondaryAction from "../ListItemSecondaryAction/ListItemSecondaryAction";
 import Divider from "../Divider/Divider";
 import { ArrowLeftTwoTone, DevicesOtherOutlined, SignalCellularNullRounded } from "@mui/material/ListItem";
+import { iconVariants } from '../Icon/icon-variants'
 
 
 
@@ -149,7 +150,7 @@ ListItem.propTypes = {
    * if set, Icon will display.
    * Use the name of the icon from https://material.io/tools/icons.
    */
-  icon: PropTypes.string,
+  icon: PropTypes.oneOf(iconVariants),
 
     /**
    * The color of the icon.
