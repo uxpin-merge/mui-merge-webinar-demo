@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DialogM from "@mui/material/Dialog";
-
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * @uxpindocurl https://mui.com/api/dialog/#main-content
  */
 
+/**
+ * @uxpinwrappers
+ * SkipContainerWrapper, NonResizableWrapper
+ */
 function Dialog(props) {
 
   const { uxpinRef, ...other } = props;
+  let id = uuidv4();
 
   const [open, setOpen] = React.useState(props.open);
 
@@ -24,17 +29,25 @@ function Dialog(props) {
   };
 
   return (
-    <DialogM
-      open={open}
-      onClose={() => setOpen(false)}
-      // disableEnforceFocus
-      // keepMounted
-      disablePortal={true}
-      style={{ minWidth: "300px", minHeight: "300px", width: "100%", height: "100%" }}
-      {...props}
+    <div ref={uxpinRef} id={id}
+      style={{ minWidth: "300px", minHeight: "300px", height: props.height, width: props.width }}
     >
-      {props.children}
-    </DialogM>
+
+
+      <DialogM
+        PaperProps={{ sx: { position: "fixed", top: props.topPosition } }}
+        TransitionProps={{ tabIndex: "null" }}
+        open={open}
+        onClose={() => setOpen(false)}
+        // disableEnforceFocus
+        // keepMounted
+        // disablePortal={false}
+        container={() => document.getElementById(id)}
+        // style={{ minWidth: "300px", minHeight: "300px", width: "100%", height: "100%" }} 
+        {...other}
+      >
+        {props.children}
+      </DialogM></div>
   )
 }
 
@@ -43,12 +56,23 @@ Dialog.propTypes = {
    * If `true`, the Dialog is open.
    */
   open: PropTypes.bool,
+  /**
+   * Width of the dialog. This should equal the width of UXP canvas
 
+   */
+  width: PropTypes.number,
   /**
    * Height of the dialog. This should equal the height of UXP canvas
-   * @uxpinignoreprop
+
    */
   height: PropTypes.number,
+
+  /**
+ * Height of the dialog. This should equal the height of UXP canvas
+
+ */
+  topPosition: PropTypes.number,
+
 
   /**
    * If `true`, the dialog will be full-screen
@@ -70,7 +94,6 @@ Dialog.propTypes = {
   /**
    * Callback fired when the backdrop is clicked.
    */
-  /** @uxpinignoreprop */
   onBackdropClick: PropTypes.func,
 
 
@@ -134,7 +157,7 @@ Dialog.propTypes = {
    * Exit event to use with UXPin interactions.
    */
   onExit: PropTypes.func,
-  
+
   onClose: PropTypes.func,
 
   /**
