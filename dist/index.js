@@ -25,6 +25,7 @@ var InputLabel = _interopDefault(require('@mui/material/InputLabel'));
 var SliderM = _interopDefault(require('@mui/material/Slider'));
 var SwitchM = _interopDefault(require('@mui/material/Switch'));
 var TextFieldM = _interopDefault(require('@mui/material/TextField'));
+var InputAdornment = _interopDefault(require('@mui/material/InputAdornment'));
 var ToggleButtonM = _interopDefault(require('@mui/material/ToggleButton'));
 var ToggleButtonGroupM = _interopDefault(require('@mui/material/ToggleButtonGroup'));
 var AvatarM = _interopDefault(require('@mui/material/Avatar'));
@@ -691,8 +692,23 @@ SwitchWithLabel.defaultProps = {
   }
 };
 
+var _excluded$2 = ["uxpinRef", "startAdornment", "endAdornment"];
+
 function TextField(props) {
-  return /*#__PURE__*/React__default.createElement(TextFieldM, props);
+  var startAdornment = props.startAdornment,
+      endAdornment = props.endAdornment,
+      other = _objectWithoutPropertiesLoose(props, _excluded$2);
+
+  return /*#__PURE__*/React__default.createElement(TextFieldM, _extends({}, other, {
+    InputProps: {
+      startAdornment: props.startAdornment && /*#__PURE__*/React__default.createElement(InputAdornment, {
+        position: "start"
+      }, /*#__PURE__*/React__default.createElement(Icon, null, startAdornment)),
+      endAdornment: props.endAdornment && /*#__PURE__*/React__default.createElement(InputAdornment, {
+        position: "end"
+      }, /*#__PURE__*/React__default.createElement(Icon, null, endAdornment))
+    }
+  }));
 }
 
 TextField.propTypes = {
@@ -708,6 +724,7 @@ TextField.propTypes = {
   margin: PropTypes__default.oneOf(['dense', 'none', 'normal']),
   defaultValue: PropTypes__default.string,
   disabled: PropTypes__default.bool,
+  type: PropTypes__default.oneOf(['text', 'number', 'password']),
   required: PropTypes__default.bool,
   error: PropTypes__default.bool,
   fullWidth: PropTypes__default.bool,
@@ -720,6 +737,8 @@ TextField.propTypes = {
   rows: PropTypes__default.number,
   select: PropTypes__default.bool,
   SelectProps: PropTypes__default.object,
+  startAdornment: PropTypes__default.oneOf(iconVariants),
+  endAdornment: PropTypes__default.oneOf(iconVariants),
   onChange: PropTypes__default.func,
   sx: PropTypes__default.object
 };
@@ -901,7 +920,7 @@ ListItemSecondaryAction.propTypes = {
   className: PropTypes__default.string
 };
 
-var _excluded$2 = ["uxpinRef", "isCollapsible", "button", "onClick"];
+var _excluded$3 = ["uxpinRef", "isCollapsible", "button", "onClick"];
 
 function ListItem(props) {
   var useStyles = styles.makeStyles(function (theme) {
@@ -976,7 +995,7 @@ function ListItem(props) {
   var isCollapsible = props.isCollapsible,
       button = props.button,
       onClick = props.onClick,
-      other = _objectWithoutPropertiesLoose(props, _excluded$2);
+      other = _objectWithoutPropertiesLoose(props, _excluded$3);
 
   return /*#__PURE__*/React__default.createElement(React__default.Fragment, {
     key: "some-unique-id"
@@ -1003,7 +1022,7 @@ function ListItem(props) {
 ListItem.propTypes = {
   primary: PropTypes__default.string,
   secondary: PropTypes__default.string,
-  icon: PropTypes__default.string,
+  icon: PropTypes__default.oneOf(iconVariants),
   iconColor: PropTypes__default.oneOf(["inherit", "primary", "secondary", "action", "error", "disabled"]),
   alignItems: PropTypes__default.oneOf(["flex-start", "center"]),
   isCollapsible: PropTypes__default.bool,
@@ -1381,7 +1400,7 @@ AlertTitle.propTypes = {
   sx: PropTypes__default.object
 };
 
-var _excluded$3 = ["isOpen", "icon", "title", "hasClose", "onClose"];
+var _excluded$4 = ["isOpen", "icon", "title", "hasClose", "onClose"];
 
 function Alert(props) {
   var _React$useState = React__default.useState(props.isOpen),
@@ -1394,7 +1413,7 @@ function Alert(props) {
 
   var icon = props.icon,
       title = props.title,
-      otherProps = _objectWithoutPropertiesLoose(props, _excluded$3);
+      otherProps = _objectWithoutPropertiesLoose(props, _excluded$4);
 
   return /*#__PURE__*/React__default.createElement(Collapse$1, {
     "in": open
@@ -1532,10 +1551,10 @@ LinearProgress.propTypes = {
   sx: PropTypes__default.object
 };
 
-var _excluded$4 = ["uxpinRef"];
+var _excluded$5 = ["uxpinRef"];
 function Snackbar(props) {
   var uxpinRef = props.uxpinRef,
-      other = _objectWithoutPropertiesLoose(props, _excluded$4);
+      other = _objectWithoutPropertiesLoose(props, _excluded$5);
 
   var _React$useState = React.useState(props.open),
       open = _React$useState[0],
@@ -1591,10 +1610,10 @@ Snackbar.propTypes = {
   sx: PropTypes__default.object
 };
 
-var _excluded$5 = ["uxpinRef"];
+var _excluded$6 = ["uxpinRef"];
 
 function Skeleton(props) {
-  var other = _objectWithoutPropertiesLoose(props, _excluded$5);
+  var other = _objectWithoutPropertiesLoose(props, _excluded$6);
 
   return /*#__PURE__*/React.createElement(SkeletonM, other, props.children);
 }
@@ -1705,11 +1724,11 @@ FormHelperText.propTypes = {
   sx: PropTypes__default.object
 };
 
-var _excluded$6 = ["uxpinRef"];
+var _excluded$7 = ["uxpinRef"];
 
 function Box(props) {
   var uxpinRef = props.uxpinRef,
-      other = _objectWithoutPropertiesLoose(props, _excluded$6);
+      other = _objectWithoutPropertiesLoose(props, _excluded$7);
 
   return /*#__PURE__*/React__default.createElement(BoxM, _extends({
     ref: uxpinRef
@@ -1786,7 +1805,7 @@ Grid.propTypes = {
   sx: PropTypes__default.object
 };
 
-var _excluded$7 = ["hasDivider"];
+var _excluded$8 = ["hasDivider"];
 
 function Stack(props) {
   var dividerOrientation = '';
@@ -1798,7 +1817,7 @@ function Stack(props) {
   }
 
   var hasDivider = props.hasDivider,
-      otherProps = _objectWithoutPropertiesLoose(props, _excluded$7);
+      otherProps = _objectWithoutPropertiesLoose(props, _excluded$8);
 
   return /*#__PURE__*/React.createElement(StackM, _extends({}, otherProps, {
     divider: hasDivider && /*#__PURE__*/React.createElement(DividerM, {

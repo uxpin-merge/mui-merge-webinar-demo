@@ -21,6 +21,7 @@ import InputLabel from '@mui/material/InputLabel';
 import SliderM from '@mui/material/Slider';
 import SwitchM from '@mui/material/Switch';
 import TextFieldM from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 import ToggleButtonM from '@mui/material/ToggleButton';
 import ToggleButtonGroupM from '@mui/material/ToggleButtonGroup';
 import AvatarM from '@mui/material/Avatar';
@@ -686,8 +687,23 @@ SwitchWithLabel.defaultProps = {
   }
 };
 
+var _excluded$2 = ["uxpinRef", "startAdornment", "endAdornment"];
+
 function TextField(props) {
-  return /*#__PURE__*/React__default.createElement(TextFieldM, props);
+  var startAdornment = props.startAdornment,
+      endAdornment = props.endAdornment,
+      other = _objectWithoutPropertiesLoose(props, _excluded$2);
+
+  return /*#__PURE__*/React__default.createElement(TextFieldM, _extends({}, other, {
+    InputProps: {
+      startAdornment: props.startAdornment && /*#__PURE__*/React__default.createElement(InputAdornment, {
+        position: "start"
+      }, /*#__PURE__*/React__default.createElement(Icon, null, startAdornment)),
+      endAdornment: props.endAdornment && /*#__PURE__*/React__default.createElement(InputAdornment, {
+        position: "end"
+      }, /*#__PURE__*/React__default.createElement(Icon, null, endAdornment))
+    }
+  }));
 }
 
 TextField.propTypes = {
@@ -703,6 +719,7 @@ TextField.propTypes = {
   margin: PropTypes.oneOf(['dense', 'none', 'normal']),
   defaultValue: PropTypes.string,
   disabled: PropTypes.bool,
+  type: PropTypes.oneOf(['text', 'number', 'password']),
   required: PropTypes.bool,
   error: PropTypes.bool,
   fullWidth: PropTypes.bool,
@@ -715,6 +732,8 @@ TextField.propTypes = {
   rows: PropTypes.number,
   select: PropTypes.bool,
   SelectProps: PropTypes.object,
+  startAdornment: PropTypes.oneOf(iconVariants),
+  endAdornment: PropTypes.oneOf(iconVariants),
   onChange: PropTypes.func,
   sx: PropTypes.object
 };
@@ -896,7 +915,7 @@ ListItemSecondaryAction.propTypes = {
   className: PropTypes.string
 };
 
-var _excluded$2 = ["uxpinRef", "isCollapsible", "button", "onClick"];
+var _excluded$3 = ["uxpinRef", "isCollapsible", "button", "onClick"];
 
 function ListItem(props) {
   var useStyles = makeStyles(function (theme) {
@@ -971,7 +990,7 @@ function ListItem(props) {
   var isCollapsible = props.isCollapsible,
       button = props.button,
       onClick = props.onClick,
-      other = _objectWithoutPropertiesLoose(props, _excluded$2);
+      other = _objectWithoutPropertiesLoose(props, _excluded$3);
 
   return /*#__PURE__*/React__default.createElement(React__default.Fragment, {
     key: "some-unique-id"
@@ -998,7 +1017,7 @@ function ListItem(props) {
 ListItem.propTypes = {
   primary: PropTypes.string,
   secondary: PropTypes.string,
-  icon: PropTypes.string,
+  icon: PropTypes.oneOf(iconVariants),
   iconColor: PropTypes.oneOf(["inherit", "primary", "secondary", "action", "error", "disabled"]),
   alignItems: PropTypes.oneOf(["flex-start", "center"]),
   isCollapsible: PropTypes.bool,
@@ -1376,7 +1395,7 @@ AlertTitle.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$3 = ["isOpen", "icon", "title", "hasClose", "onClose"];
+var _excluded$4 = ["isOpen", "icon", "title", "hasClose", "onClose"];
 
 function Alert(props) {
   var _React$useState = React__default.useState(props.isOpen),
@@ -1389,7 +1408,7 @@ function Alert(props) {
 
   var icon = props.icon,
       title = props.title,
-      otherProps = _objectWithoutPropertiesLoose(props, _excluded$3);
+      otherProps = _objectWithoutPropertiesLoose(props, _excluded$4);
 
   return /*#__PURE__*/React__default.createElement(Collapse$1, {
     "in": open
@@ -1527,10 +1546,10 @@ LinearProgress.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$4 = ["uxpinRef"];
+var _excluded$5 = ["uxpinRef"];
 function Snackbar(props) {
   var uxpinRef = props.uxpinRef,
-      other = _objectWithoutPropertiesLoose(props, _excluded$4);
+      other = _objectWithoutPropertiesLoose(props, _excluded$5);
 
   var _React$useState = useState(props.open),
       open = _React$useState[0],
@@ -1586,10 +1605,10 @@ Snackbar.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$5 = ["uxpinRef"];
+var _excluded$6 = ["uxpinRef"];
 
 function Skeleton(props) {
-  var other = _objectWithoutPropertiesLoose(props, _excluded$5);
+  var other = _objectWithoutPropertiesLoose(props, _excluded$6);
 
   return /*#__PURE__*/createElement(SkeletonM, other, props.children);
 }
@@ -1700,11 +1719,11 @@ FormHelperText.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$6 = ["uxpinRef"];
+var _excluded$7 = ["uxpinRef"];
 
 function Box(props) {
   var uxpinRef = props.uxpinRef,
-      other = _objectWithoutPropertiesLoose(props, _excluded$6);
+      other = _objectWithoutPropertiesLoose(props, _excluded$7);
 
   return /*#__PURE__*/React__default.createElement(BoxM, _extends({
     ref: uxpinRef
@@ -1781,7 +1800,7 @@ Grid.propTypes = {
   sx: PropTypes.object
 };
 
-var _excluded$7 = ["hasDivider"];
+var _excluded$8 = ["hasDivider"];
 
 function Stack(props) {
   var dividerOrientation = '';
@@ -1793,7 +1812,7 @@ function Stack(props) {
   }
 
   var hasDivider = props.hasDivider,
-      otherProps = _objectWithoutPropertiesLoose(props, _excluded$7);
+      otherProps = _objectWithoutPropertiesLoose(props, _excluded$8);
 
   return /*#__PURE__*/createElement(StackM, _extends({}, otherProps, {
     divider: hasDivider && /*#__PURE__*/createElement(DividerM, {
